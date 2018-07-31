@@ -1,7 +1,52 @@
 <div>
-  <h2>{{"Title : "+getTitle()}}</h2>
+  <!-- string interpolation
+    *two way
+    suited for div/span/titles etc
+    property binding alternative :
+    string interpolation :  <h2>{{getTitle()}}</h2>
+    property binding : <h2 [textContent]="title"/>
+  -->
+  <h2>{{getTitle()}}</h2>
+  <!--<img src="{{imageUrl}}" />-->
+
+
+  <!-- property binding
+     *only one way
+  -->
+  <!--<img [src]="imageUrl" />-->
+
+  <table>
+    <tr>
+      <td [attr.colspan]="colSpan">ssss</td>
+      <button class="btn btn-primary" [class.active]="isActive">Save</button>
+      <button [style.backgroundColor]="isActive ? 'blue':'white'">Save</button>
+      <div (click)="onDivClicked($event)">
+        <button (click)="onSave($event)">Save</button>
+        <br>
+        <!-- one directional -->
+        1
+        <input [value]="email1" (keyup.enter)="onKeyUp()" />
+        <br>
+        <!-- two directional -->
+        2
+        <input [value]="email2" (keyup.enter)="email2=$event.target.value; onKeyUp()" />
+        <br>
+        <!-- banana in a box-->
+        3
+        <input [(ngModel)]="email3" (keyup.enter)="onKeyUp()" />
+      </div>
+    </tr>
+  </table>
+  {{text | summary:10}}
   <ul>
-    <li *ngFor="let course of courses">{{course}}</li>
+    <li *ngFor="let course of courses">
+      {{course.title | uppercase }}
+      <br> {{course.name | lowercase }}
+      <br> {{course.students | number}}
+      <br> {{course.rating |number:'1.2-2'}}
+      <br> {{course.price | currency:'INR'}}
+      <br> {{course.releaseDate | date:'shortDate'}}
+    </li>
   </ul>
   <app-course></app-course>
 </div>
