@@ -6,7 +6,6 @@
     string interpolation :  <h2>{{getTitle()}}</h2>
     property binding : <h2 [textContent]="title"/>
   -->
-  <h2>{{getTitle()}}</h2>
   <!--<img src="{{imageUrl}}" />-->
 
 
@@ -15,7 +14,7 @@
   -->
   <!--<img [src]="imageUrl" />-->
 
-  <table>
+  <!-- <table>
     <tr>
       <td [attr.colspan]="colSpan">ssss</td>
       <button class="btn btn-primary" [class.active]="isActive">Save</button>
@@ -23,30 +22,54 @@
       <div (click)="onDivClicked($event)">
         <button (click)="onSave($event)">Save</button>
         <br>
-        <!-- one directional -->
+        // one directional 
         1
         <input [value]="email1" (keyup.enter)="onKeyUp()" />
         <br>
-        <!-- two directional -->
+        //two directional 
         2
         <input [value]="email2" (keyup.enter)="email2=$event.target.value; onKeyUp()" />
         <br>
-        <!-- banana in a box-->
+        // banana in a box
         3
         <input [(ngModel)]="email3" (keyup.enter)="onKeyUp()" />
       </div>
     </tr>
-  </table>
-  {{text | summary:10}}
-  <ul>
-    <li *ngFor="let course of courses">
-      {{course.title | uppercase }}
-      <br> {{course.name | lowercase }}
-      <br> {{course.students | number}}
-      <br> {{course.rating |number:'1.2-2'}}
-      <br> {{course.price | currency:'INR'}}
-      <br> {{course.releaseDate | date:'shortDate'}}
-    </li>
-  </ul>
-  <app-course></app-course>
-</div>
+  </table>  -->
+  <!-- {{text | summary:10}} -->
+  <!-- * structural components prefixed with * -->
+  <button (click)="onAdd()"> Add</button>
+  <div *ngIf="courses.length > 0; then coursesList else noCourses">
+  </div>
+  <ng-template #coursesList>
+    {{getTitle()}}
+    <ul>
+      <li *ngFor="let course of courses;even as isEven">
+        {{course.title | uppercase }} <a (click)="onRemove(course)">X</a>
+        <!-- <span *ngIf="isEven">even</span> -->
+        <!-- <br> {{course.name | lowercase }}
+        <br> {{course.students | number}}
+        <br> {{course.rating |number:'1.2-2'}}
+        <br> {{course.price | currency:'INR'}}
+        <br> {{course.releaseDate | date:'shortDate'}} -->
+      </li>
+    </ul>
+  </ng-template>
+  <ng-template #noCourses> No courses Yet</ng-template>
+
+  <!-- <div [hidden]="courses.length == 0">
+      {{getTitle()}}....
+      <ul>
+        <li *ngFor="let course of courses">
+          {{course.title | uppercase }}
+           <br> {{course.name | lowercase }}
+          <br> {{course.students | number}}
+          <br> {{course.rating |number:'1.2-2'}}
+          <br> {{course.price | currency:'INR'}}
+          <br> {{course.releaseDate | date:'shortDate'}}
+        </li>
+      </ul>
+  </div>
+  <div  [hidden]="courses.length > 0">
+      No courses Yet....
+  </div> -->

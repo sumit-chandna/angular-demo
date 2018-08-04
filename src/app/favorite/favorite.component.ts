@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-favorite',
@@ -8,8 +8,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   //problem : property in class must match inputs otherwise 
   //it will not work
   // inputs:['isFavorite']
+  //ViewEncapsulation.Emulated works by attaching additional attributes 
+  //to DOM
+  //ViewEncapsulation.NATIVE works byusing DOM shadowdom,works only on latest browser versions
+  encapsulation: ViewEncapsulation.Emulated
 })
-export class FavoriteComponent implements OnInit {
+export class FavoriteComponent {
   //first approach for input
   @Input('is-favorite') isFavorite: boolean;
   //isFavorite: boolean;
@@ -19,8 +23,6 @@ export class FavoriteComponent implements OnInit {
   @Output('change') changedEvent = new EventEmitter();
   constructor() { }
 
-  ngOnInit() {
-  }
   onClick() {
     this.isFavorite = !this.isFavorite;
     this.changedEvent.emit({ newValue: this.isFavorite });

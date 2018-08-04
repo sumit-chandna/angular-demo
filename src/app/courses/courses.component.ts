@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CoursesService } from '../courses.service';
+import { CoursesService } from '../services/courses.service';
 
 @Component({
   selector: 'app-courses',
@@ -24,6 +24,21 @@ export class CoursesComponent {
     console.log("button clicked");
     this.isActive = !this.isActive;
     $event.stopPropagation();
+  }
+  onAdd() {
+    this.courses.push({
+      id: 3,
+      title: "title of courseee",
+      name: "name of courseee",
+      rating: 4.9787,
+      students: 3044,
+      price: 243.9,
+      releaseDate: new Date(2016, 6, 1)
+    });
+  }
+  onRemove(course) {
+    let index = this.courses.indexOf(course);
+    this.courses.splice(index, 1);
   }
   onDivClicked($event) {
     console.log("div clicked");

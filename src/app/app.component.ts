@@ -12,6 +12,7 @@ export class AppComponent {
     title: "favorite",
     isFavorite: true
   }
+  viewMode='map';
   onFavoriteChange(eventArgs: FavoriteChangedEventArgs) {
     console.log("favorite Changed: ", eventArgs.newValue);
   }
